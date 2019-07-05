@@ -1,4 +1,41 @@
 <mat-card>
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-form-field>
+      <!--1. Type in ngModel
+          2. Type name = "title"
+             This way, you're basically using [(ngModel)] but in a different way
+          3. Type #title="ngModel" (This is a reference variable, so that you can do the below
+          4. *ngIf="title.invalid" to check if it's valid.
+          5. To add validation, type the "required, minlength="3", etc. These are html validations-->
+      <input
+        matInput
+        type="text"
+        name="title"
+        ngModel
+        required
+        minlength="3"
+        placeholder="Post Title"
+        #title="ngModel"
+      />
+      <mat-error *ngIf="title.invalid">Please enter a post title.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="4"
+        name="content"
+        ngModel
+        required
+        placeholder="Post Content"
+        #content="ngModel"
+      ></textarea>
+      <mat-error *ngIf="content.invalid">Please enter a post title.</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">Save Post</button>
+  </form>
+</mat-card>
+
+<!-- <mat-card>
   <mat-form-field>
     <input matInput type="text" [(ngModel)]="enteredTitle" />
   </mat-form-field>
@@ -9,4 +46,4 @@
     Save Post
   </button>
 </mat-card>
-<hr />
+<hr /> -->
