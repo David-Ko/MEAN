@@ -3,10 +3,19 @@ const express = require("express");
 
 const app = express();
 
+const Post = require("../backend/models/post");
+const mongoose = require("mongoose");
+
 // app.use((req, res, next) => {
 //   console.log("first middleware");
 //   next();
 // });
+mongoose
+  .connect(
+    "mongodb+srv://dko:zvMGHbrLLIsKZ29r@mean-yhs4h.mongodb.net/test?retryWrites=true&w=majority"
+  )
+  .then(() => console.log("Connected to database!"))
+  .catch(() => console.log("Connection Failed"));
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -25,7 +34,11 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/posts", (req, res, next) => {
-  const post = req.body; // you can now use .body because of the bodyparse up above
+  // const post = req.body; // you can now use .body because of the bodyparse up above
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
+  });
   console.log(post);
   res.status(201).json({ message: "Got your post" });
 });
