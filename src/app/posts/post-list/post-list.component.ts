@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Post } from "../../entities/post.model";
 import { PostsService } from "src/app/service/posts.service";
 import { Subscription } from "rxjs";
+import { post } from "selenium-webdriver/http";
 @Component({
   selector: "app-post-list",
   templateUrl: "./post-list.component.html",
@@ -31,5 +32,9 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.postsSub.unsubscribe();
+  }
+
+  onDelete(postId: string) {
+    this.postsService.deletePost(postId);
   }
 }
