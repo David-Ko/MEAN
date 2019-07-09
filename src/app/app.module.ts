@@ -10,7 +10,8 @@ import {
   MatCardModule,
   MatButtonModule,
   MatToolbarModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatProgressSpinnerModule
 } from "@angular/material";
 import { FormsModule } from "@angular/forms";
 import { HeaderComponent } from "./header/header.component";
@@ -32,6 +33,7 @@ import { HttpClientModule } from "@angular/common/http";
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     MatExpansionModule,
     FormsModule,
     HttpClientModule

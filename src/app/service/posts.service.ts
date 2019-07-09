@@ -3,12 +3,13 @@ import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { Router } from "@angular/router";
 @Injectable({ providedIn: "root" })
 export class PostsService {
   private posts: Post[] = []; // this is the original array, which is a "reference types".  In short, you're pointing to the same place in the memory. So, you're always going back to this same array
   private postsUpdated = new Subject<Post[]>();
 
-  constructor(private http: HttpClient) {} //the http is an Observable itself that gives you the body of the response
+  constructor(private http: HttpClient, private router: Router) {} //the http is an Observable itself that gives you the body of the response
 
   getPosts() {
     // return this.posts;
@@ -49,6 +50,7 @@ export class PostsService {
         post.id = id;
         this.posts.push(post); // this mutates the original array
         this.postsUpdated.next([...this.posts]); // this copies the original array and get it ready to become an OBSERVABLE
+        this.router.navigate(["/"]);
       });
   }
 
@@ -82,6 +84,7 @@ export class PostsService {
         updatedPosts[oldPostIndex] = post;
         this.posts = updatedPosts;
         this.postsUpdated.next([...this.posts]);
+        this.router.navigate(["/"]);
       });
   }
 }
